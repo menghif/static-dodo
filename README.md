@@ -1,28 +1,33 @@
 # dodo-SSG
 
-This Static Site Generator (SSG) command-line tool generates html files using txt files.
+![oksmith-dodo-bird](https://user-images.githubusercontent.com/53121061/133529086-a9ef9617-3b50-488f-ac74-48b274eb90fd.jpg)
+
+This Static Site Generator (SSG) command-line tool generates html files from txt files.
 
 A single txt file or a folder containing txt files can be used as input.
+All the html files will be created inside a new `./dist` folder.
 
-All the html files will be created inside a new dist folder.
+The fist line of the text will be used as the html title and will be placed inside of a `<h1>` tag.
+Users can specify a CSS stylesheet using the option `-s` or `--stylesheet`
 
 ## Prerequisites
 
-Requirements for the software:
+Requirements to run this tool:
 
 - [NodeJS](https://nodejs.org/en/)
 
 ## Installing
 
-`npm install`
+- Clone the repository
+- `cd` into the folder
+- run `npm install`
 
 ## Usage
 
 ```
-my-ssg --input file.txt
-my-ssg -i ./folder-name
+dodo-SSG --input file.txt
+dodo-SSG -i ./folder-name
 dodo-SSG -i folder-name -s [CSS Stylesheet URL]
-
 ```
 
 ## Example Input
