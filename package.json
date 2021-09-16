@@ -1,7 +1,7 @@
 {
   "name": "dodo-SSG",
-  "version": "0.1",
-  "description": "A simple Yargs CLI",
+  "version": "0.1.0",
+  "description": "A simple Static Site Generator CLI",
   "bin": {
     "dodo-SSG": "./dodo-SSG.js"
   },
