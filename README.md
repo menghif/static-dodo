@@ -21,6 +21,7 @@ Requirements to run this tool:
 - Clone the repository
 - `cd` into the folder
 - run `npm install`
+- run `npm link`
 
 ## Usage
 
