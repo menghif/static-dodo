@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const package = require("./package.json");
 
 const argv = require("yargs")
   .usage("Usage: $0 [options]")
@@ -11,7 +12,7 @@ const argv = require("yargs")
   .alias("s", "stylesheet")
   .describe("s", "Provide stylesheet")
   .alias("v", "version")
-  .help("h")
+  .version(true, `dodo-SSG version: ${package.version}`)
   .alias("h", "help").argv;
 
 let files = [];
