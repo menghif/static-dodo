@@ -10,7 +10,7 @@
   ],
   "preferGlobal": true,
   "author": "Francesco Menghi",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "yargs": "^17.1.1"
   },
