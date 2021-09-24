@@ -48,8 +48,11 @@ let stylesheet = "";
 
 if (fs.existsSync(argv.input)) {
   // if input name is a '.txt' file, save it to files[0]
-  if (fs.statSync(argv.input).isFile() && argv.input.match(/.txt$/)) {
-    files[0] = argv.input;
+  if (fs.statSync(argv.input).isFile()) {
+      if(argv.input.match(/.txt$/))
+        files[0] = argv.input;
+      if(argv.input.match(/.md$/))
+        mdFiles[0] = argv.input;
   }
 
   // if input name is a directory, save all '.txt' files to files array

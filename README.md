@@ -2,7 +2,7 @@
 
 ![oksmith-dodo-bird](https://user-images.githubusercontent.com/53121061/133529086-a9ef9617-3b50-488f-ac74-48b274eb90fd.jpg)
 
-This Static Site Generator (SSG) command-line tool generates html files from txt files.
+This Static Site Generator (SSG) command-line tool generates html files from txt and markdown (.md) files.
 
 A single txt file or a folder containing txt files can be used as input.
 All the html files will be created inside a new `./dist` folder.
@@ -27,6 +27,7 @@ Requirements to run this tool:
 
 ```
 dodo-SSG --input file.txt
+dodo-SSG --input file.md
 dodo-SSG -i ./folder-name
 dodo-SSG -i folder-name -s [CSS Stylesheet URL]
 ```
