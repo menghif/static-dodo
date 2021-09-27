@@ -76,16 +76,20 @@ if (fs.existsSync(argv.input)) {
 }
 
 if (fs.existsSync(process.cwd() + "/dist")) {
-  fs.rmSync(process.cwd() + "/dist", { recursive: true }, (err) => {
+  try {
+    fs.rmSync(process.cwd() + "/dist", { recursive: true });
+  } catch {
     console.error("Unable to delete ./dist directory.");
     process.exit(-1);
-  });
+  }
 }
 
-fs.mkdirSync(process.cwd() + "/dist", (err) => {
+try {
+  fs.mkdirSync(process.cwd() + "/dist");
+} catch {
   console.error("Unable to create ./dist directory.");
   process.exit(-1);
-});
+}
 
 //if there is md file
 if (mdFiles.length > 0) {
