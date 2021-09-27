@@ -37,13 +37,13 @@ const writeHTMLFile = (title, body, file, fileType) => {
   // get filename without its '.txt' extension
   const fileName = path.basename(file, fileType);
 
-  // write to 'dist' directory new html file
-  fs.writeFileSync("./dist/" + fileName + ".html", fullHTML);
+  // write to './dist' directory new html file
+  fs.writeFileSync(process.cwd() + "/dist/" + fileName + ".html", fullHTML);
 };
 
 let files = [];
 let mdFiles = [];
-let currentDir = "./";
+let currentDir = process.cwd();
 let stylesheet = "";
 
 if (fs.existsSync(argv.input)) {
@@ -55,39 +55,39 @@ if (fs.existsSync(argv.input)) {
 
   // if input name is a directory, save all '.txt' files to files array
   if (fs.statSync(argv.input).isDirectory()) {
-    currentDir = "./" + argv.input + "/";
+    currentDir = currentDir + "/" + argv.input;
     files = fs
       .readdirSync(currentDir)
       .filter(
         (file) =>
-          fs.statSync(`./${currentDir}/${file}`).isFile() && file.match(/.txt$/)
+          fs.statSync(currentDir + "/" + file).isFile() && file.match(/.txt$/)
       );
 
     mdFiles = fs
       .readdirSync(currentDir)
       .filter(
         (file) =>
-          fs.statSync(`./${currentDir}/${file}`).isFile() && file.match(/.md$/)
+          fs.statSync(currentDir + "/" + file).isFile() && file.match(/.md$/)
       );
   }
 } else {
   console.log("file or directory not found!");
 }
 
-if (fs.existsSync("./dist")) {
-  fs.rmSync("./dist", { recursive: true }, (err) => {
+if (fs.existsSync(process.cwd() + "/dist")) {
+  fs.rmSync(process.cwd() + "/dist", { recursive: true }, (err) => {
     console.log(err);
   });
 }
 
-fs.mkdirSync("./dist", (err) => {
+fs.mkdirSync(process.cwd() + "/dist", (err) => {
   console.log(err);
 });
 //if there is md file
 if (mdFiles.length > 0) {
   mdFiles.forEach((file) => {
     let fullMdText = fs
-      .readFileSync(currentDir + file, "utf-8")
+      .readFileSync(currentDir + "/" + file, "utf-8")
       .replace(/^###### (.*$)/gim, "<h6>$1</h6>")
       .replace(/^##### (.*$)/gim, "<h5>$1</h5>")
       .replace(/^#### (.*$)/gim, "<h4>$1</h4>")
@@ -117,7 +117,7 @@ if (mdFiles.length > 0) {
 }
 if (files.length > 0) {
   files.forEach((file) => {
-    const fullText = fs.readFileSync(currentDir + file, "utf-8");
+    const fullText = fs.readFileSync(currentDir + "/" + file, "utf-8");
 
     // get title from first line of text
     const title = fullText.substr(0, fullText.indexOf("\n"));
