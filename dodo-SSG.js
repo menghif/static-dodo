@@ -56,8 +56,19 @@ if (fs.existsSync(argv.input)) {
   // if input name is a directory, save all '.txt' files to files array
   if (fs.statSync(argv.input).isDirectory()) {
     currentDir = "./" + argv.input + "/";
-    files = fs.readdirSync(currentDir).filter((file) => file.match(/.txt$/));
-    mdFiles = fs.readdirSync(currentDir).filter((file) => file.match(/.md$/));
+    files = fs
+      .readdirSync(currentDir)
+      .filter(
+        (file) =>
+          fs.statSync(`./${currentDir}/${file}`).isFile() && file.match(/.txt$/)
+      );
+
+    mdFiles = fs
+      .readdirSync(currentDir)
+      .filter(
+        (file) =>
+          fs.statSync(`./${currentDir}/${file}`).isFile() && file.match(/.md$/)
+      );
   }
 } else {
   console.log("file or directory not found!");
