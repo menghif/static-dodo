@@ -71,18 +71,22 @@ if (fs.existsSync(argv.input)) {
       );
   }
 } else {
-  console.log("file or directory not found!");
+  console.error("File or directory not found!");
+  process.exit(-1);
 }
 
 if (fs.existsSync(process.cwd() + "/dist")) {
   fs.rmSync(process.cwd() + "/dist", { recursive: true }, (err) => {
-    console.log(err);
+    console.error("Unable to delete ./dist directory.");
+    process.exit(-1);
   });
 }
 
 fs.mkdirSync(process.cwd() + "/dist", (err) => {
-  console.log(err);
+  console.error("Unable to create ./dist directory.");
+  process.exit(-1);
 });
+
 //if there is md file
 if (mdFiles.length > 0) {
   mdFiles.forEach((file) => {
@@ -115,6 +119,7 @@ if (mdFiles.length > 0) {
     writeHTMLFile(title, htmlBody, file, ".md");
   });
 }
+
 if (files.length > 0) {
   files.forEach((file) => {
     const fullText = fs.readFileSync(currentDir + "/" + file, "utf-8");
