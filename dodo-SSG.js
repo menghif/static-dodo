@@ -108,6 +108,7 @@ if (mdFiles.length > 0) {
       .replace(/\*(.*)\*/gim, "<i>$1</i>")
       .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
       .replace(/`([^`]*)`/gim, "<code>$1</code>")
+      .replace(/^---$/m, "<hr>")
       .replace(/^\`\`\`/gim, "")
       .trim();
 
