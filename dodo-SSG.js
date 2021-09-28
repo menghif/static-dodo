@@ -34,11 +34,11 @@ const writeHTMLFile = (title, body, file, fileType) => {
     </body>
     </html>`;
 
-  // get filename without its '.txt' extension
-  const fileName = path.basename(file, fileType);
+  // get filename without its '.txt' extension and append '.html' to it
+  const HtmlFileName = path.basename(file, fileType) + ".html";
 
   // write to './dist' directory new html file
-  fs.writeFileSync(process.cwd() + "/dist/" + fileName + ".html", fullHTML);
+  fs.writeFileSync(path.join(process.cwd(), "dist", HtmlFileName), fullHTML);
 };
 
 let files = [];
@@ -55,19 +55,21 @@ if (fs.existsSync(argv.input)) {
 
   // if input name is a directory, save all '.txt' files to files array
   if (fs.statSync(argv.input).isDirectory()) {
-    currentDir = currentDir + "/" + argv.input;
+    currentDir = path.join(currentDir, argv.input);
     files = fs
       .readdirSync(currentDir)
       .filter(
         (file) =>
-          fs.statSync(currentDir + "/" + file).isFile() && file.match(/.txt$/)
+          fs.statSync(path.join(currentDir, file)).isFile() &&
+          file.match(/.txt$/)
       );
 
     mdFiles = fs
       .readdirSync(currentDir)
       .filter(
         (file) =>
-          fs.statSync(currentDir + "/" + file).isFile() && file.match(/.md$/)
+          fs.statSync(path.join(currentDir, file)).isFile() &&
+          file.match(/.md$/)
       );
   }
 } else {
@@ -75,9 +77,9 @@ if (fs.existsSync(argv.input)) {
   process.exit(-1);
 }
 
-if (fs.existsSync(process.cwd() + "/dist")) {
+if (fs.existsSync(path.join(process.cwd(), "dist"))) {
   try {
-    fs.rmSync(process.cwd() + "/dist", { recursive: true });
+    fs.rmSync(path.join(process.cwd(), "dist"), { recursive: true });
   } catch {
     console.error("Unable to delete ./dist directory.");
     process.exit(-1);
@@ -85,7 +87,7 @@ if (fs.existsSync(process.cwd() + "/dist")) {
 }
 
 try {
-  fs.mkdirSync(process.cwd() + "/dist");
+  fs.mkdirSync(path.join(process.cwd(), "dist"));
 } catch {
   console.error("Unable to create ./dist directory.");
   process.exit(-1);
@@ -95,7 +97,7 @@ try {
 if (mdFiles.length > 0) {
   mdFiles.forEach((file) => {
     let fullMdText = fs
-      .readFileSync(currentDir + "/" + file, "utf-8")
+      .readFileSync(path.join(currentDir, file), "utf-8")
       .replace(/^###### (.*$)/gim, "<h6>$1</h6>")
       .replace(/^##### (.*$)/gim, "<h5>$1</h5>")
       .replace(/^#### (.*$)/gim, "<h4>$1</h4>")
@@ -127,7 +129,7 @@ if (mdFiles.length > 0) {
 
 if (files.length > 0) {
   files.forEach((file) => {
-    const fullText = fs.readFileSync(currentDir + "/" + file, "utf-8");
+    const fullText = fs.readFileSync(path.join(currentDir, file), "utf-8");
 
     // get title from first line of text
     const title = fullText.substr(0, fullText.indexOf("\n"));
