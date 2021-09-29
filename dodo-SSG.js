@@ -115,7 +115,8 @@ if (mdFiles.length > 0) {
     let htmlBody = fullMdText
       .split(/\r?\n\r?\n/)
       .map((param, idx) => {
-        if (!param.match(/^<h\d>/gm)) return `\t<p>${param}</p>\n`;
+        if (!param.match(/^<h\d>/gm) && !param.match(/^<hr>$/gm))
+          return `\t<p>${param}</p>\n`;
         return `\t${param}\n`;
       })
       .join(" ");
