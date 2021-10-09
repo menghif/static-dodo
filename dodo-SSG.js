@@ -8,12 +8,13 @@ const argv = require("yargs")
   .usage("Usage: $0 [options]")
   .alias("i", "input")
   .describe("i", "Load input file or directory")
-  .demandOption(["i"])
   .alias("s", "stylesheet")
   .describe("s", "Provide stylesheet")
   .alias("v", "version")
   .version(true, `dodo-SSG version: ${version}`)
-  .alias("h", "help").argv;
+  .alias("h", "help")
+  .alias("c", "config")
+  .describe("c", "Provide a path to a JSON file").argv;
 
 const writeHTMLFile = (title, body, file, fileType) => {
   // if user provided a stylesheet, include stylesheet in the html
@@ -45,6 +46,50 @@ let files = [];
 let mdFiles = [];
 let currentDir = process.cwd();
 let stylesheet = "";
+
+if (argv.config) {
+  if (!(typeof argv.config === 'string' || argv.config instanceof String)) {
+    console.error("Please enter a path to a JSON file.");
+    process.exit(1);
+  }
+
+  if (!argv.config.endsWith(".json")) {
+    console.error("Please provide a file that ends with \"json\" extension.");
+    process.exit(1);
+  }
+
+  let fileContent = '';
+  try {
+    fileContent = fs.readFileSync(argv.config);
+  } catch (err) {
+    console.error("There has been an error while reading the file.");
+    console.error(err);
+    process.exit(1);
+  }
+
+  let configFile = {};
+  try {
+    configFile = JSON.parse(fileContent);
+  } catch (err) {
+    console.error("This file cannot be parsed as a JSON.");
+    process.exit(1);
+  }
+
+  if (configFile["input"]) {
+    argv.input = configFile["input"];
+  } 
+  else {
+    console.error("Please provide a path to a text file.");
+    process.exit(1);
+  }
+
+  argv.stylesheet = configFile["stylesheet"];
+}
+
+if (!argv.input) {
+  console.error("Please, enter a path to a file or folder.");
+  process.exit(1);
+}
 
 if (fs.existsSync(argv.input)) {
   // if input name is a '.txt' file, save it to files[0]
