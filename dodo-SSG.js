@@ -58,6 +58,16 @@ if (argv.config) {
     process.exit(1);
   }
 
+  if (!fs.existsSync(argv.config)) {
+    console.error("The file does not exist.");
+    process.exit(1);
+  }
+
+  if (!fs.statSync(argv.config).isFile()) {
+    console.error("This is not a regular input file. Please enter a text file. ");
+    process.exit(1);
+  }
+
   let fileContent = '';
   try {
     fileContent = fs.readFileSync(argv.config);
