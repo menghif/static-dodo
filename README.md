@@ -30,7 +30,17 @@ dodo-SSG --input file.txt
 dodo-SSG --input file.md
 dodo-SSG -i ./folder-name
 dodo-SSG -i folder-name -s [CSS Stylesheet URL]
+dodo-SSG -c path-to-json
 ```
+
+### JSON Configuration
+
+You can use a JSON configuration file to pass options to `dodo-SSG`.
+
+The JSON can accept the options `input` and `stylesheet`.
+These ones will override the ones passed in the command.
+
+The `input` option in the JSON is required.
 
 ## Example Input
 
