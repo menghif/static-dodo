@@ -12,6 +12,7 @@
   "author": "Francesco Menghi",
   "license": "MIT",
   "dependencies": {
+    "markdown-it": "^12.2.0",
     "yargs": "^17.1.1"
   },
   "devDependencies": {
