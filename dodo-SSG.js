@@ -4,7 +4,17 @@ const fs = require("fs");
 const path = require("path");
 const yargs = require("yargs");
 const { version } = require("./package.json");
-const md = require("markdown-it")();
+const hljs = require("highlight.js");
+const md = require("markdown-it")({
+  highlight: (str, lang) => {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(str, { language: lang }).value;
+      } catch (__) {}
+    }
+    return "";
+  },
+});
 
 const argv = yargs
   .usage("Usage: $0 [options]")
@@ -32,6 +42,7 @@ const writeHTMLFile = (title, body, file, fileType, stylesheet) => {
       <title>${title}</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="${stylesheet}">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/github.css">
     </head>
     <body>
       <h1>${title}</h1>
