@@ -1,10 +1,22 @@
 #!/usr/bin/env node
+/* eslint-disable no-undef */
 
 const fs = require("fs");
 const path = require("path");
 const yargs = require("yargs");
 const { version } = require("./package.json");
-const md = require("markdown-it")();
+const hljs = require("highlight.js");
+const md = require("markdown-it")({
+  highlight: (str, lang) => {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(str, { language: lang }).value;
+        // eslint-disable-next-line no-empty
+      } catch (__) {}
+    }
+    return "";
+  },
+});
 
 const argv = yargs
   .usage("Usage: $0 [options]")
@@ -32,6 +44,7 @@ const writeHTMLFile = (title, body, file, fileType, stylesheet) => {
       <title>${title}</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="${stylesheet}">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/github.css">
     </head>
     <body>
       <h1>${title}</h1>
@@ -126,9 +139,7 @@ if (argv.config) {
   }
 
   if (!fs.statSync(argv.config).isFile()) {
-    console.error(
-      "This is not a regular input file. Please enter a text file. "
-    );
+    console.error("This is not a regular input file. Please enter a text file. ");
     process.exit(1);
   }
 
@@ -174,19 +185,11 @@ if (fs.existsSync(argv.input)) {
     currentDir = path.join(currentDir, argv.input);
     txtFiles = fs
       .readdirSync(currentDir)
-      .filter(
-        (file) =>
-          fs.statSync(path.join(currentDir, file)).isFile() &&
-          file.match(/.txt$/)
-      );
+      .filter((file) => fs.statSync(path.join(currentDir, file)).isFile() && file.match(/.txt$/));
 
     mdFiles = fs
       .readdirSync(currentDir)
-      .filter(
-        (file) =>
-          fs.statSync(path.join(currentDir, file)).isFile() &&
-          file.match(/.md$/)
-      );
+      .filter((file) => fs.statSync(path.join(currentDir, file)).isFile() && file.match(/.md$/));
   }
 
   // if user provided a stylesheet, include stylesheet in the html
