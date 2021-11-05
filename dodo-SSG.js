@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-undef */
 
 const fs = require("fs");
 const path = require("path");
@@ -10,6 +11,7 @@ const md = require("markdown-it")({
     if (lang && hljs.getLanguage(lang)) {
       try {
         return hljs.highlight(str, { language: lang }).value;
+        // eslint-disable-next-line no-empty
       } catch (__) {}
     }
     return "";
@@ -137,9 +139,7 @@ if (argv.config) {
   }
 
   if (!fs.statSync(argv.config).isFile()) {
-    console.error(
-      "This is not a regular input file. Please enter a text file. "
-    );
+    console.error("This is not a regular input file. Please enter a text file. ");
     process.exit(1);
   }
 
@@ -185,19 +185,11 @@ if (fs.existsSync(argv.input)) {
     currentDir = path.join(currentDir, argv.input);
     txtFiles = fs
       .readdirSync(currentDir)
-      .filter(
-        (file) =>
-          fs.statSync(path.join(currentDir, file)).isFile() &&
-          file.match(/.txt$/)
-      );
+      .filter((file) => fs.statSync(path.join(currentDir, file)).isFile() && file.match(/.txt$/));
 
     mdFiles = fs
       .readdirSync(currentDir)
-      .filter(
-        (file) =>
-          fs.statSync(path.join(currentDir, file)).isFile() &&
-          file.match(/.md$/)
-      );
+      .filter((file) => fs.statSync(path.join(currentDir, file)).isFile() && file.match(/.md$/));
   }
 
   // if user provided a stylesheet, include stylesheet in the html

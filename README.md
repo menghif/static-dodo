@@ -10,18 +10,27 @@ All the html files will be created inside a new `./dist` folder.
 The fist line of the text will be used as the html title and will be placed inside of a `<h1>` tag.
 Users can specify a CSS stylesheet using the option `-s` or `--stylesheet`
 
-## Prerequisites
+## Requirements
 
-Requirements to run this tool:
+Requirements to install and run:
 
-- [NodeJS](https://nodejs.org/en/)
+- LTS version of [NodeJS](https://nodejs.org/en/)
 
-## Installing
+## Installation
 
-- Clone the repository
-- `cd` into the folder
-- run `npm install`
-- run `npm link`
+To install the dependencies, use:
+
+```console
+npm install
+```
+
+To create a symlink in the global folder, use:
+
+```console
+npm link
+```
+
+This will allow you to use `dodo-SSG` from anywhere in your system.
 
 ## Usage
 
@@ -72,9 +81,8 @@ The first recorded mention of the dodo was by Dutch sailors in 1598.
     <h1>DODO Facts</h1>
 
     <p>
-      The dodo (Raphus cucullatus) is an extinct flightless bird that was
-      endemic to the island of Mauritius, east of Madagascar in the Indian
-      Ocean.
+      The dodo (Raphus cucullatus) is an extinct flightless bird that was endemic to the island of
+      Mauritius, east of Madagascar in the Indian Ocean.
     </p>
 
     <p>The first recorded mention of the dodo was by Dutch sailors in 1598.</p>
