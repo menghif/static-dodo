@@ -1,23 +1,11 @@
 #!/usr/bin/env node
-/* eslint-disable no-undef */
 
 const fs = require("fs");
 const path = require("path");
 const yargs = require("yargs");
 const { version } = require("./package.json");
-const hljs = require("highlight.js");
-const md = require("markdown-it")({
-  highlight: (str, lang) => {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(str, { language: lang }).value;
-        // eslint-disable-next-line no-empty
-      } catch (__) {}
-    }
-    return "";
-  },
-});
-
+const { parseConfigFile } = require("./lib/config");
+const { parseInput } = require("./lib/input");
 const argv = yargs
   .usage("Usage: $0 [options]")
   .option("i", {
@@ -35,71 +23,6 @@ const argv = yargs
   .alias("v", "version")
   .version(true, `dodo-SSG version: ${version}`)
   .alias("h", "help").argv;
-
-const writeHTMLFile = (title, body, file, fileType, stylesheet) => {
-  const fullHTML = `<!doctype html>
-    <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <title>${title}</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="${stylesheet}">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/github.css">
-    </head>
-    <body>
-      <h1>${title}</h1>
-    ${body}
-    </body>
-    </html>`;
-
-  // get filename without its '.txt' extension and append '.html' to it
-  const HtmlFileName = path.basename(file, fileType) + "html";
-
-  // write to './dist' directory new html file
-  fs.writeFileSync(path.join(process.cwd(), "dist", HtmlFileName), fullHTML);
-};
-
-const parseMdFiles = (fullText) => {
-  let htmlBody = md.render(fullText);
-  return htmlBody.substr(htmlBody.indexOf("</h1>", 1) + 6);
-};
-
-const parseTxtFiles = (fullText) => {
-  const fullTxtText = fullText;
-
-  let htmlBody = fullTxtText
-    .split(/\r?\n\r?\n/)
-    .map((para) => `\t<p>${para.replace(/\r?\n/, " ")}</p>\n\n`)
-    .join(" ");
-
-  // remove first line of htmlBody and return
-  return htmlBody.substr(htmlBody.indexOf("\n", 1));
-};
-
-const extractTitle = (fileType, fullText) => {
-  if (fileType === "txt") {
-    // get title from first line of text
-    return fullText.substr(0, fullText.indexOf("\n"));
-  }
-  if (fileType === "md") {
-    return fullText.substr(1, fullText.indexOf("\n"));
-  }
-};
-
-const processFiles = (files, fileType, currentDir, stylesheet) => {
-  files.forEach((file) => {
-    const fullText = fs.readFileSync(path.join(currentDir, file), "utf-8");
-    const title = extractTitle(fileType, fullText);
-    let htmlBody = "";
-    if (fileType === "txt") {
-      htmlBody = parseTxtFiles(fullText);
-    }
-    if (fileType === "md") {
-      htmlBody = parseMdFiles(fullText);
-    }
-    writeHTMLFile(title, htmlBody, file, fileType, stylesheet);
-  });
-};
 
 if (!argv.input && !argv.config) {
   yargs.showHelp();
@@ -123,88 +46,13 @@ try {
 }
 
 if (argv.config) {
-  if (!(typeof argv.config === "string" || argv.config instanceof String)) {
-    console.error("Please enter a path to a JSON file.");
-    process.exit(1);
-  }
-
-  if (!argv.config.endsWith(".json")) {
-    console.error('Please provide a file that ends with "json" extension.');
-    process.exit(1);
-  }
-
-  if (!fs.existsSync(argv.config)) {
-    console.error("The file does not exist.");
-    process.exit(1);
-  }
-
-  if (!fs.statSync(argv.config).isFile()) {
-    console.error("This is not a regular input file. Please enter a text file. ");
-    process.exit(1);
-  }
-
-  let fileContent = "";
-  try {
-    fileContent = fs.readFileSync(argv.config);
-  } catch (err) {
-    console.error("There has been an error while reading the file.");
-    console.error(err);
-    process.exit(1);
-  }
-
-  let configFile = {};
-  try {
-    configFile = JSON.parse(fileContent);
-  } catch (err) {
-    console.error("This file cannot be parsed as a JSON.");
-    process.exit(1);
-  }
-
-  if (configFile["input"]) {
-    argv.input = configFile["input"];
-  } else {
-    console.error("Please provide a path to a text file.");
-    process.exit(1);
-  }
-
-  argv.stylesheet = configFile["stylesheet"];
+  const { input, stylesheet } = parseConfigFile(argv.config);
+  argv.input = input;
+  argv.stylesheet = stylesheet;
 }
 
 if (fs.existsSync(argv.input)) {
-  let txtFiles = [];
-  let mdFiles = [];
-  let currentDir = process.cwd();
-  // if input name is a '.txt' file, save it to txtFiles[0]
-  if (fs.statSync(argv.input).isFile()) {
-    if (argv.input.match(/.txt$/)) txtFiles[0] = argv.input;
-    if (argv.input.match(/.md$/)) mdFiles[0] = argv.input;
-  }
-
-  // if input name is a directory, save all '.txt' files to files array
-  if (fs.statSync(argv.input).isDirectory()) {
-    currentDir = path.join(currentDir, argv.input);
-    txtFiles = fs
-      .readdirSync(currentDir)
-      .filter((file) => fs.statSync(path.join(currentDir, file)).isFile() && file.match(/.txt$/));
-
-    mdFiles = fs
-      .readdirSync(currentDir)
-      .filter((file) => fs.statSync(path.join(currentDir, file)).isFile() && file.match(/.md$/));
-  }
-
-  // if user provided a stylesheet, include stylesheet in the html
-  let stylesheet = "";
-  if (argv.stylesheet) {
-    stylesheet = argv.stylesheet;
-  }
-
-  if (mdFiles.length > 0) {
-    processFiles(mdFiles, "md", currentDir, stylesheet);
-  }
-
-  if (txtFiles.length > 0) {
-    processFiles(txtFiles, "txt", currentDir, stylesheet);
-  }
+  parseInput(argv.input, argv.stylesheet);
 } else {
   console.error("File or directory not found!");
   process.exit(-1);
