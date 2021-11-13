@@ -2,8 +2,9 @@
   "name": "dodo-SSG",
   "version": "0.1.0",
   "description": "A simple Static Site Generator CLI",
+  "main": "dodo-SSG.js",
   "bin": {
-    "dodo-SSG": "./dodo-SSG.js"
+    "dodo-SSG": "dodo-SSG.js"
   },
   "keywords": [
     "cli"
@@ -16,7 +17,8 @@
     "prettier-check": "npx prettier --check .",
     "eslint": "npx eslint --config .eslintrc.js",
     "eslint-fix": "npx eslint --config .eslintrc.js --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "jest"
   },
   "dependencies": {
     "highlight.js": "^11.3.1",
@@ -26,6 +28,7 @@
   "devDependencies": {
     "eslint": "^8.1.0",
     "husky": "^7.0.4",
+    "jest": "^27.3.1",
     "prettier": "2.4.0"
   }
 }

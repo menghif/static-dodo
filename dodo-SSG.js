@@ -6,6 +6,7 @@ const yargs = require("yargs");
 const { version } = require("./package.json");
 const { parseConfigFile } = require("./lib/config");
 const { parseInput } = require("./lib/input");
+const { processFile } = require("./lib/processFile");
 const argv = yargs
   .usage("Usage: $0 [options]")
   .option("i", {
@@ -52,7 +53,12 @@ if (argv.config) {
 }
 
 if (fs.existsSync(argv.input)) {
-  parseInput(argv.input, argv.stylesheet);
+  const { files, currentDir } = parseInput(argv.input);
+  if (files.length > 0) {
+    files.forEach((file) => {
+      processFile(file, currentDir, argv.stylesheet);
+    });
+  }
 } else {
   console.error("File or directory not found!");
   process.exit(-1);

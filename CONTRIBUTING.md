@@ -71,3 +71,19 @@ or to fix the errors that ESLint knows how to fix:
 ```console
 npm run eslint-fix
 ```
+
+## Code Testing
+
+This project uses [Jest]() for testing. You can run all the tests with the command:
+
+```console
+npm test
+```
+
+To run a specific test (for example for file name `foo.js`):
+
+```console
+npm test foo
+```
+
+Tests are found in files that end in `.test.js`. You can follow the Jest docs for the basics on how to to get started writing tests.
