@@ -9,5 +9,4 @@ module.exports = {
     ecmaVersion: 13,
   },
   rules: {},
-  disable: no - undef,
 };
