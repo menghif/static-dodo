@@ -102,3 +102,6 @@ textfiles
 
 # TernJS port file
 .tern-port
+
+#macOS hidden file
+.DS_Store
