@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [main]
+    branches: [testPnpm]
   pull_request:
-    branches: [main]
+    branches: [testPnpm]
 
 jobs:
   prettier:
@@ -16,10 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.23.1
       - name: Install dependencies and run prettier-check
         run: |
-          npm install
-          npm run prettier-check
+          pnpm install
+          pnpm run prettier-check
 
   eslint:
     name: ESLint Check
@@ -27,10 +30,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.23.1
       - name: Install dependencies and run eslint
         run: |
-          npm install
-          npm run eslint
+          pnpm install
+          pnpm run eslint
 
   build:
     runs-on: ubuntu-latest
@@ -42,10 +48,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.23.1
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: npm ci
-      - run: npm test
+          cache: "pnpm"
+      - run: pnpm i
+      - run: pnpm test
