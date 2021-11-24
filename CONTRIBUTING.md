@@ -10,19 +10,17 @@ Requirements to install and run:
 
 ## Installation
 
-To install the dependencies, use:
+Install the dependencies:
 
 ```console
 npm install
 ```
 
-To create a symlink in the global folder, use:
+Then run the program:
 
 ```console
-npm link
+node dodo-ssg [options]
 ```
-
-This will allow you to use `dodo-SSG` from anywhere in your system.
 
 ## Workflow
 

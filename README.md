@@ -1,11 +1,13 @@
-# dodo-SSG
+# dodo-ssg
 
-![oksmith-dodo-bird](https://user-images.githubusercontent.com/53121061/133529086-a9ef9617-3b50-488f-ac74-48b274eb90fd.jpg)
+<img src="https://openclipart.org/image/400px/26541" alt="oksmith-dodo-bird" height="200" >
 
-This Static Site Generator (SSG) command-line tool generates html files from txt and markdown (.md) files.
+This Static Site Generator (SSG) command-line tool generates html files from text or markdown files.
 
-A single txt file or a folder containing txt files can be used as input.
-All the html files will be created inside a new `./dist` folder.
+A single `.txt` or `.md` file or txt files can be used as input.
+A folder containing `.txt` or `.md` files can also be used as input.
+
+All the html files will be created inside a new `./dist` folder. If a `./dist` folder already exists, the folder's content will be replaced with the html files created by `dodo-ssg`.
 
 The fist line of the text will be used as the html title and will be placed inside of a `<h1>` tag.
 Users can specify a CSS stylesheet using the option `-s` or `--stylesheet`
@@ -15,19 +17,14 @@ Users can specify a CSS stylesheet using the option `-s` or `--stylesheet`
 Requirements to install and run:
 
 - LTS version of [NodeJS](https://nodejs.org/en/)
+- [NPM](https://nodejs.org/en/knowledge/getting-started/npm/what-is-npm/) (comes preinstalled with NodeJS)
 
 ## Installation
 
-To install the dependencies, use:
+To install the dodo-ssg command line tool, use:
 
 ```console
-npm install
-```
-
-To create a symlink in the global folder, use:
-
-```console
-npm link
+npm install -g dodo-ssg
 ```
 
 This will allow you to use `dodo-SSG` from anywhere in your system.
@@ -93,6 +90,8 @@ The first recorded mention of the dodo was by Dutch sailors in 1598.
 ## Built With
 
 - [Yargs](https://github.com/yargs/yargs) - Used for command line arguments
+- [Markdown-it](https://github.com/markdown-it/markdown-it) - Used for Markdown support
+- [Highlight.js](https://github.com/highlightjs/highlight.js) - Use for Markdown code highlight support
 
 ## Author
 
