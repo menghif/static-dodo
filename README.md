@@ -34,9 +34,13 @@ This will allow you to use `static-dodo` from anywhere in your system.
 ```
 static-dodo --input file.txt
 static-dodo --input file.md
-static-dodo -i ./folder-name
+static-dodo -i "Filename with spaces.txt"
+
+static-dodo -i folder-name
 static-dodo -i folder-name -s [CSS Stylesheet URL]
-static-dodo -c path-to-json
+static-dodo -i folder-name --stylesheet [CSS Stylesheet URL]
+
+static-dodo -c path-to-json-file
 ```
 
 ### JSON Configuration
@@ -44,9 +48,9 @@ static-dodo -c path-to-json
 You can use a JSON configuration file to pass options to `static-dodo`.
 
 The JSON can accept the options `input` and `stylesheet`.
-These ones will override the ones passed in the command.
+These options will override the ones passed in the command.
 
-The `input` option in the JSON is required.
+The `input` option in the JSON is **required**.
 
 ## Example Input
 
