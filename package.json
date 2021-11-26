@@ -1,10 +1,10 @@
 {
-  "name": "dodo-ssg",
+  "name": "static-dodo",
   "version": "1.0.1",
   "description": "A simple Static Site Generator CLI",
-  "main": "dodo-ssg.js",
+  "main": "static-dodo.js",
   "bin": {
-    "dodo-ssg": "dodo-ssg.js"
+    "static-dodo": "static-dodo.js"
   },
   "keywords": [
     "cli"

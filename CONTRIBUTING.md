@@ -19,7 +19,7 @@ npm install
 Then run the program:
 
 ```console
-node dodo-ssg [options]
+node static-dodo [options]
 ```
 
 ## Workflow
@@ -27,7 +27,7 @@ node dodo-ssg [options]
 To make a change, please use the following GitHub workflow:
 
 1. fork this repo on GitHub
-1. clone your forked repo to your local machine, `git clone https://github.com/{your username}/dodo-SSG`
+1. clone your forked repo to your local machine, `git clone https://github.com/{your username}/static-dodo`
 1. create a new branch off of the `main` branch, `git checkout -b {new branch name} main`
 1. make your changes and save
 1. check to see which files have changed, `git status`

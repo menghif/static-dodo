@@ -23,7 +23,7 @@ const argv = yargs
     describe: "Provide a path to a JSON file",
   })
   .alias("v", "version")
-  .version(true, `dodo-SSG version: ${version}`)
+  .version(true, `static-dodo version: ${version}`)
   .alias("h", "help").argv;
 
 if (!argv.input && !argv.config) {
