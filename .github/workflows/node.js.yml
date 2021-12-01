@@ -18,10 +18,10 @@ jobs:
       - uses: pnpm/action-setup@v2.0.1
         with:
           version: 6.23.1
-      - name: Install dependencies and run prettier-check
       - uses: actions/setup-node@v2
         with:
           cache: "pnpm"
+      - name: Install dependencies and run prettier-check
         run: |
           pnpm i
           pnpm prettier-check
@@ -34,10 +34,10 @@ jobs:
       - uses: pnpm/action-setup@v2.0.1
         with:
           version: 6.23.1
-      - name: Install dependencies and run eslint
       - uses: actions/setup-node@v2
         with:
           cache: "pnpm"
+      - name: Install dependencies and run eslint
         run: |
           pnpm i
           pnpm eslint
