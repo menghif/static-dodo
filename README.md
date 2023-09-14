@@ -95,7 +95,7 @@ The first recorded mention of the dodo was by Dutch sailors in 1598.
 ###### ./dist/Dodo-Facts.html
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
