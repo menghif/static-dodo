@@ -1,7 +1,5 @@
 # static-dodo
 
-<img src="https://openclipart.org/image/400px/26541" alt="oksmith-dodo-bird" height="200" >
-
 This Static Site Generator (SSG) command-line tool generates html files from text or markdown files.
 
 A single `.txt` or `.md` file can be used as input.
