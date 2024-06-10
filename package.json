@@ -19,7 +19,7 @@
     "eslint": "npx eslint --config eslint.config.js",
     "eslint-fix": "npx eslint --config eslint.config.js --fix",
     "prepare": "husky install",
-    "test": "jest"
+    "test": "vitest"
   },
   "dependencies": {
     "highlight.js": "^11.4.0",
@@ -32,7 +32,7 @@
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.4.0",
     "husky": "^7.0.4",
-    "jest": "^27.5.1",
-    "prettier": "3.2.5"
+    "prettier": "3.2.5",
+    "vitest": "^1.6.0"
   }
 }
