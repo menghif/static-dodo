@@ -3,6 +3,7 @@
   "version": "1.0.6",
   "description": "A simple Static Site Generator CLI",
   "main": "static-dodo.js",
+  "type": "module",
   "bin": {
     "static-dodo": "static-dodo.js"
   },
@@ -15,8 +16,8 @@
   "scripts": {
     "prettier": "npx prettier --write .",
     "prettier-check": "npx prettier --check .",
-    "eslint": "npx eslint --config .eslintrc.js",
-    "eslint-fix": "npx eslint --config .eslintrc.js --fix",
+    "eslint": "npx eslint --config eslint.config.js",
+    "eslint-fix": "npx eslint --config eslint.config.js --fix",
     "prepare": "husky install",
     "test": "jest"
   },
@@ -26,8 +27,11 @@
     "minimist": "^1.2.8"
   },
   "devDependencies": {
-    "eslint": "^8.1.0",
-    "husky": "^9.0.11",
+    "@eslint/js": "^9.4.0",
+    "eslint": "^9.4.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.4.0",
+    "husky": "^7.0.4",
     "jest": "^27.5.1",
     "prettier": "3.2.5"
   }

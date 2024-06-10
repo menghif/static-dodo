@@ -106,8 +106,9 @@ The first recorded mention of the dodo was by Dutch sailors in 1598.
     <h1>DODO Facts</h1>
 
     <p>
-      The dodo (Raphus cucullatus) is an extinct flightless bird that was endemic to the island of
-      Mauritius, east of Madagascar in the Indian Ocean.
+      The dodo (Raphus cucullatus) is an extinct flightless bird that was
+      endemic to the island of Mauritius, east of Madagascar in the Indian
+      Ocean.
     </p>
 
     <p>The first recorded mention of the dodo was by Dutch sailors in 1598.</p>
