@@ -26,16 +26,16 @@ node static-dodo [options]
 
 To make a change, please use the following GitHub workflow:
 
-1. fork this repo on GitHub
-1. clone your forked repo to your local machine, `git clone https://github.com/{your username}/static-dodo`
-1. create a new branch off of the `main` branch, `git checkout -b {new branch name} main`
-1. make your changes and save
-1. check to see which files have changed, `git status`
-1. stage these changed files in git, `git add file1 file2 ...`
-1. commit your changes, `git commit -m "Made the following changes..."`
-1. push your commits and branch to your GitHub fork, `git push origin {new branch name}`
-1. [create a Pull Request](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) on GitHub
-1. add a description about what you changed and submit
+1. Fork this repo on GitHub.
+1. Clone your forked repo to your local machine: `git clone https://github.com/{your username}/static-dodo`
+1. Create a new branch off of the `main` branch: `git checkout -b {new branch name} main`
+1. Make your changes and save.
+1. Check to see which files have changed: `git status`
+1. Stage these changed files in git: `git add file1 file2 ...`
+1. Commit your changes: `git commit -m "Made the following changes..."`
+1. Push your commits and branch to your GitHub fork: `git push origin {new branch name}`
+1. [create a Pull Request](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) on GitHub.
+1. Add a description about what you changed and submit.
 
 ## Code format
 
@@ -72,7 +72,7 @@ npm run eslint-fix
 
 ## Code Testing
 
-This project uses [Jest]() for testing. You can run all the tests with the command:
+This project uses [Vitest](https://vitest.dev) for testing. You can run all the tests with the command:
 
 ```console
 npm test
@@ -84,4 +84,4 @@ To run a specific test (for example for file name `foo.js`):
 npm test foo
 ```
 
-Tests are found in files that end in `.test.js`. You can follow the Jest docs for the basics on how to to get started writing tests.
+Tests are found in files that end in `.test.js`. You can follow the Vitest [docs](https://vitest.dev/guide/) for the basics on how to to get started writing tests.
