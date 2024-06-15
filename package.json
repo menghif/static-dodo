@@ -1,6 +1,6 @@
 {
   "name": "static-dodo",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "A simple Static Site Generator CLI",
   "main": "static-dodo.js",
   "type": "module",
