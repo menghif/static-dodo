@@ -28,10 +28,9 @@
     "minimist": "^1.2.8"
   },
   "devDependencies": {
-    "@eslint/js": "^9.4.0",
+    "@eslint/js": "^9.5.0",
     "@vitest/coverage-v8": "^1.6.0",
-    "eslint": "^9.4.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint": "^9.5.0",
     "globals": "^15.4.0",
     "husky": "^7.0.4",
     "prettier": "3.2.5",
