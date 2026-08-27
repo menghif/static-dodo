@@ -7,13 +7,14 @@ Thanks for your interest in the project!
 Requirements to install and run:
 
 - LTS version of [NodeJS](https://nodejs.org/en/)
+- [pnpm](https://pnpm.io)
 
 ## Installation
 
 Install the dependencies:
 
 ```console
-npm install
+pnpm install
 ```
 
 Then run the program:
@@ -45,13 +46,13 @@ If you use [VS Code](https://code.visualstudio.com) prettier will be run every t
 You can run the following to run prettier from the terminal:
 
 ```console
-npm run prettier
+pnpm run prettier
 ```
 
 or to avoid overwriting files you can check if the files are already formatted:
 
 ```console
-npm run prettier-check
+pnpm run prettier-check
 ```
 
 ## Code linting
@@ -61,13 +62,13 @@ The project uses [ESLint](https://eslint.org) to find mistakes in the code.
 You can run the following to run ESLint from the terminal and show the errors:
 
 ```console
-npm run eslint
+pnpm run eslint
 ```
 
 or to fix the errors that ESLint knows how to fix:
 
 ```console
-npm run eslint-fix
+pnpm run eslint-fix
 ```
 
 ## Code Testing
@@ -75,13 +76,13 @@ npm run eslint-fix
 This project uses [Vitest](https://vitest.dev) for testing. You can run all the tests with the command:
 
 ```console
-npm test
+pnpm test
 ```
 
 To run a specific test (for example for file name `foo.js`):
 
 ```console
-npm test foo
+pnpm test foo
 ```
 
 Tests are found in files that end in `.test.js`. You can follow the Vitest [docs](https://vitest.dev/guide/) for the basics on how to to get started writing tests.
