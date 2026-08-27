@@ -16,14 +16,14 @@ A custom CSS stylesheet can be specified by using the option `-s` or `--styleshe
 Requirements to install and run:
 
 - LTS version of [NodeJS](https://nodejs.org/en/)
-- [NPM](https://nodejs.org/en/knowledge/getting-started/npm/what-is-npm/) (comes preinstalled with NodeJS)
+- [pnpm](https://pnpm.io)
 
 ## Installation
 
 To install the static-dodo command line tool, use:
 
 ```console
-npm install -g static-dodo
+pnpm add -g static-dodo
 ```
 
 This will allow you to use `static-dodo` from anywhere in your system.
