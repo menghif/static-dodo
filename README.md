@@ -118,7 +118,7 @@ The first recorded mention of the dodo was by Dutch sailors in 1598.
 
 ## Built With
 
-- [Yargs](https://github.com/yargs/yargs) - Used for command line arguments
+- [minimist](https://github.com/minimistjs/minimist) - Used for command line arguments
 - [Markdown-it](https://github.com/markdown-it/markdown-it) - Used for Markdown support
 - [Highlight.js](https://github.com/highlightjs/highlight.js) - Use for Markdown code highlight support
 
