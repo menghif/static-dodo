@@ -49,6 +49,17 @@ if (!argv.input && !argv.config) {
   process.exit(0);
 }
 
+if (argv.config) {
+  const { input, stylesheet } = parseConfigFile(argv.config);
+  argv.input = input;
+  argv.stylesheet = stylesheet;
+}
+
+if (!fs.existsSync(argv.input)) {
+  console.error("File or directory not found!");
+  process.exit(-1);
+}
+
 if (fs.existsSync(path.join(process.cwd(), "dist"))) {
   try {
     fs.rmSync(path.join(process.cwd(), "dist"), { recursive: true });
@@ -65,20 +76,9 @@ try {
   process.exit(-1);
 }
 
-if (argv.config) {
-  const { input, stylesheet } = parseConfigFile(argv.config);
-  argv.input = input;
-  argv.stylesheet = stylesheet;
-}
-
-if (fs.existsSync(argv.input)) {
-  const { files, currentDir } = parseInput(argv.input);
-  if (files.length > 0) {
-    files.forEach((file) => {
-      processFile(file, currentDir, argv.stylesheet);
-    });
-  }
-} else {
-  console.error("File or directory not found!");
-  process.exit(-1);
+const { files, currentDir } = parseInput(argv.input);
+if (files.length > 0) {
+  files.forEach((file) => {
+    processFile(file, currentDir, argv.stylesheet);
+  });
 }
