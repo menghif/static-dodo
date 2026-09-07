@@ -2,6 +2,7 @@
 import fs from "fs";
 import path from "path";
 import process from "process";
+import { fileURLToPath } from "url";
 import minimist from "minimist";
 import { getHelp } from "./lib/help.js";
 import { parseConfigFile } from "./lib/config.js";
@@ -24,7 +25,10 @@ const argv = minimist(process.argv.slice(2), {
 });
 
 if (argv.version) {
-  const packageJsonContent = fs.readFileSync("./package.json", "utf8");
+  const packageJsonContent = fs.readFileSync(
+    path.join(path.dirname(fileURLToPath(import.meta.url)), "package.json"),
+    "utf8",
+  );
   const packageInfo = JSON.parse(packageJsonContent);
 
   console.log(packageInfo.version);
